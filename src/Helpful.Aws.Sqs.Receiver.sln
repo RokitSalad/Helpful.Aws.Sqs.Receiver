@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpful.Aws.Sqs.Receiver", "Helpful.Aws.Sqs.Receiver\Helpful.Aws.Sqs.Receiver.csproj", "{184D0E3C-90E7-4C96-A632-518C378E6E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpful.Aws.Sqs.Receiver", "Helpful.Aws.Sqs.Receiver\Helpful.Aws.Sqs.Receiver.csproj", "{184D0E3C-90E7-4C96-A632-518C378E6E25}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpful.Aws.Sqs.Receiver.Test.Integration", "Helpful.Aws.Sqs.Receiver.Test.Integration\Helpful.Aws.Sqs.Receiver.Test.Integration.csproj", "{602F4CAD-BC9D-4CAD-85C0-94018CA97534}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpful.Aws.Sqs.Receiver.Test.Unit", "Helpful.Aws.Sqs.Receiver.Test.Unit\Helpful.Aws.Sqs.Receiver.Test.Unit.csproj", "{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{184D0E3C-90E7-4C96-A632-518C378E6E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{184D0E3C-90E7-4C96-A632-518C378E6E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{184D0E3C-90E7-4C96-A632-518C378E6E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{602F4CAD-BC9D-4CAD-85C0-94018CA97534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602F4CAD-BC9D-4CAD-85C0-94018CA97534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602F4CAD-BC9D-4CAD-85C0-94018CA97534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602F4CAD-BC9D-4CAD-85C0-94018CA97534}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
