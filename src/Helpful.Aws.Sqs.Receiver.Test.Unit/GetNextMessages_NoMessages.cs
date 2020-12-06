@@ -41,7 +41,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         }
 
         [Test]
-        public void TheOneReturnedMessageIsReturned()
+        public void TheReturnedMessageIsNull()
         {
             Assert.IsNull(_returnedMessage);
         }
