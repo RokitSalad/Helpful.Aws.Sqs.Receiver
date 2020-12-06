@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Helpful.Aws.Sqs.Receiver.Messages;
@@ -9,25 +8,20 @@ using NUnit.Framework;
 
 namespace Helpful.Aws.Sqs.Receiver.Test.Unit
 {
-    public class GetNextMessages_OneMessage
+    public class GetNextMessages_NoMessages
     {
         private IMessageReceiver _messageReceiver;
         private Mock<ISqsClient> _mockAwsClient;
-        private List<SqsMessage> _messages;
         private Exception _caughtException;
         private SqsMessage _returnedMessage;
 
         [OneTimeSetUp]
         public async Task Setup()
         {
-            _messages = new List<SqsMessage>
-            {
-                new SqsMessage()
-            };
             _mockAwsClient = new Mock<ISqsClient>();
             _mockAwsClient.Setup(x =>
                     x.GetNextMessagesAsync(It.IsAny<CancellationToken>()))
-                .ReturnsAsync(_messages);
+                .ReturnsAsync(new List<SqsMessage>());
             _messageReceiver = new MessageReceiver(_mockAwsClient.Object);
 
             try
@@ -49,7 +43,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         [Test]
         public void TheOneReturnedMessageIsReturned()
         {
-            Assert.AreEqual(_messages.First(), _returnedMessage);
+            Assert.IsNull(_returnedMessage);
         }
     }
 }
