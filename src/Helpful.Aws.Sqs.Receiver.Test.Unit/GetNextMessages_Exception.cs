@@ -12,13 +12,13 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
     {
         const string exceptionMessage = "Some exception";
 
-        private Mock<ISqsClient> _mockAwsClient;
+        private Mock<IQueueClient> _mockAwsClient;
         private Exception _caughtException;
 
         [OneTimeSetUp]
         public async Task Setup()
         {
-            _mockAwsClient = new Mock<ISqsClient>();
+            _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
                     x.GetNextMessagesAsync(It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception(exceptionMessage));

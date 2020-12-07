@@ -9,13 +9,13 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
 {
     public class MessageReceiver : IMessageReceiver
     {
-        private readonly ISqsClient _sqsClient;
+        private readonly IQueueClient _queueClient;
 
         private readonly Queue<SqsMessage> _receivedCache;
 
-        public MessageReceiver(ISqsClient sqsClient)
+        public MessageReceiver(IQueueClient queueClient)
         {
-            _sqsClient = sqsClient;
+            _queueClient = queueClient;
             _receivedCache = new Queue<SqsMessage>();
         }
 
@@ -25,7 +25,7 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
             {
                 if (!_receivedCache.Any())
                 {
-                    IEnumerable<SqsMessage> messages = await _sqsClient.GetNextMessagesAsync(cancellationToken);
+                    IEnumerable<SqsMessage> messages = await _queueClient.GetNextMessagesAsync(cancellationToken);
                     foreach (var message in messages)
                     {
                         _receivedCache.Enqueue(message);

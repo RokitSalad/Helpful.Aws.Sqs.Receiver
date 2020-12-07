@@ -11,14 +11,14 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
     public class GetNextMessages_NoMessages
     {
         private IMessageReceiver _messageReceiver;
-        private Mock<ISqsClient> _mockAwsClient;
+        private Mock<IQueueClient> _mockAwsClient;
         private Exception _caughtException;
         private SqsMessage _returnedMessage;
 
         [OneTimeSetUp]
         public async Task Setup()
         {
-            _mockAwsClient = new Mock<ISqsClient>();
+            _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
                     x.GetNextMessagesAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new List<SqsMessage>());

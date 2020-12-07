@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Helpful.Aws.Sqs.Receiver.Messages
 {
-    public interface ISqsClient
+    public interface IQueueClient
     {
         Task<IEnumerable<SqsMessage>> GetNextMessagesAsync(CancellationToken cancellationToken);
     }

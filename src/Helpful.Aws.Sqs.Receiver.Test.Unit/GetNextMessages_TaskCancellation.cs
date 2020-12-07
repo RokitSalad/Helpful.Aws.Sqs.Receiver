@@ -12,7 +12,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
     public class GetNextMessages_TaskCancellation
     {
         private IMessageReceiver _messageReceiver;
-        private Mock<ISqsClient> _mockAwsClient;
+        private Mock<IQueueClient> _mockAwsClient;
         private List<SqsMessage> _messages;
         private Exception _caughtException;
         private SqsMessage _returnedMessage1;
@@ -27,7 +27,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
                 new SqsMessage(),
                 new SqsMessage()
             };
-            _mockAwsClient = new Mock<ISqsClient>();
+            _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
                     x.GetNextMessagesAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_messages);
