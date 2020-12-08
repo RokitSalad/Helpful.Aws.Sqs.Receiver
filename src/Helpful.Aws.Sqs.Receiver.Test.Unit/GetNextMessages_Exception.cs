@@ -20,13 +20,13 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         {
             _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
-                    x.GetNextMessagesAsync(It.IsAny<CancellationToken>()))
+                    x.GetNextMessagesAsync())
                 .ThrowsAsync(new Exception(exceptionMessage));
             var messageReceiver = new MessageReceiver(_mockAwsClient.Object);
 
             try
             {
-                await messageReceiver.NextMessageAsync(CancellationToken.None);
+                await messageReceiver.NextMessageAsync();
             }
             catch (Exception e)
             {

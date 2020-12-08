@@ -7,7 +7,7 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
 {
     public class SqsQueueClient : IQueueClient
     {
-        public async Task<IEnumerable<SqsMessage>> GetNextMessagesAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<SqsMessage>> GetNextMessagesAsync()
         {
             throw new System.NotImplementedException();
         }

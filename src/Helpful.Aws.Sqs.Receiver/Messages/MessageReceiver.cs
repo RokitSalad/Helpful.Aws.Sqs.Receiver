@@ -19,13 +19,13 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
             _receivedCache = new Queue<SqsMessage>();
         }
 
-        public async Task<SqsMessage> NextMessageAsync(CancellationToken cancellationToken)
+        public async Task<SqsMessage> NextMessageAsync()
         {
             try
             {
                 if (!_receivedCache.Any())
                 {
-                    IEnumerable<SqsMessage> messages = await _queueClient.GetNextMessagesAsync(cancellationToken);
+                    IEnumerable<SqsMessage> messages = await _queueClient.GetNextMessagesAsync();
                     foreach (var message in messages)
                     {
                         _receivedCache.Enqueue(message);
