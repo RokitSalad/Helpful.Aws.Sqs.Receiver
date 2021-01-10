@@ -4,6 +4,6 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
 {
     public interface IMessageReceiver
     {
-        Task<SqsMessage> NextMessageAsync();
+        Task<ReceivedMessage> NextMessageAsync();
     }
 }

@@ -1,6 +1,6 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
+using Amazon.SQS.Model;
 using Helpful.Aws.Sqs.Receiver.Exceptions;
 using Helpful.Aws.Sqs.Receiver.Messages;
 using Moq;
@@ -20,9 +20,9 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         {
             _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
-                    x.GetNextMessagesAsync())
+                    x.GetNextMessagesAsync(It.IsAny<ReceiveMessageRequest>()))
                 .ThrowsAsync(new Exception(exceptionMessage));
-            var messageReceiver = new MessageReceiver(_mockAwsClient.Object);
+            var messageReceiver = new MessageReceiver(new MessageReceiverConfig(), _mockAwsClient.Object);
 
             try
             {

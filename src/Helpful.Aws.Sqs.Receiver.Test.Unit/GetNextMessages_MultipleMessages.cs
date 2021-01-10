@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using Amazon.SQS.Model;
 using Helpful.Aws.Sqs.Receiver.Messages;
 using Moq;
 using NUnit.Framework;
@@ -13,26 +13,26 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
     {
         private IMessageReceiver _messageReceiver;
         private Mock<IQueueClient> _mockAwsClient;
-        private List<SqsMessage> _messages;
+        private List<ReceivedMessage> _messages;
         private Exception _caughtException;
-        private SqsMessage _returnedMessage1;
-        private SqsMessage _returnedMessage2;
-        private SqsMessage _returnedMessage3;
+        private ReceivedMessage _returnedMessage1;
+        private ReceivedMessage _returnedMessage2;
+        private ReceivedMessage _returnedMessage3;
 
         [OneTimeSetUp]
         public async Task Setup()
         {
-            _messages = new List<SqsMessage>
+            _messages = new List<ReceivedMessage>
             {
-                new SqsMessage(),
-                new SqsMessage(),
-                new SqsMessage()
+                new ReceivedMessage(),
+                new ReceivedMessage(),
+                new ReceivedMessage()
             };
             _mockAwsClient = new Mock<IQueueClient>();
             _mockAwsClient.Setup(x =>
-                    x.GetNextMessagesAsync())
+                    x.GetNextMessagesAsync(It.IsAny<ReceiveMessageRequest>()))
                 .ReturnsAsync(_messages);
-            _messageReceiver = new MessageReceiver(_mockAwsClient.Object);
+            _messageReceiver = new MessageReceiver(new MessageReceiverConfig(), _mockAwsClient.Object);
 
             try
             {
