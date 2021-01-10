@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amazon.SQS.Model;
 using Helpful.Aws.Sqs.Receiver.Exceptions;
+using Helpful.Aws.Sqs.Receiver.Sqs;
 
 namespace Helpful.Aws.Sqs.Receiver.Messages
 {
@@ -14,10 +15,17 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
         private readonly Queue<ReceivedMessage> _receivedCache;
         private readonly ReceiveMessageRequest _requestConfig;
 
-        public MessageReceiver(MessageReceiverConfig config, IQueueClient queueClient)
+        public MessageReceiver(MessageReceiverConfig config, IQueueClient queueClient) : 
+            this(config, queueClient, new ReceiveMessageRequestBuilder())
+        {
+        }
+
+        public MessageReceiver(MessageReceiverConfig config,
+            IQueueClient queueClient, 
+            IReceiveMessageRequestBuilder requestBuilder)
         {
             _queueClient = queueClient;
-            _requestConfig = BuildReceiveMessageRequest(config);
+            _requestConfig = requestBuilder.Build(config);
             _receivedCache = new Queue<ReceivedMessage>();
         }
 
@@ -25,14 +33,7 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
         {
             try
             {
-                if (!_receivedCache.Any())
-                {
-                    IEnumerable<ReceivedMessage> messages = await _queueClient.GetNextMessagesAsync(_requestConfig);
-                    foreach (var message in messages)
-                    {
-                        _receivedCache.Enqueue(message);
-                    }
-                }
+                await EnsureCacheAsync();
 
                 return _receivedCache.Any() ? _receivedCache.Dequeue() : null;
             }
@@ -42,26 +43,25 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
             }
         }
 
-        private static ReceiveMessageRequest BuildReceiveMessageRequest(MessageReceiverConfig config)
+        private async Task EnsureCacheAsync()
         {
-            return new ReceiveMessageRequest
+            if (!_receivedCache.Any())
             {
-                AttributeNames = config.AttributeNames ?? new List<string> {"All"},
-                MaxNumberOfMessages = config.MaxNumberOfMessages,
-                QueueUrl = config.QueueUrl,
-                VisibilityTimeout = config.VisibilityTimeout,
-                WaitTimeSeconds = config.WaitTimeSeconds,
-                MessageAttributeNames = config.MessageAttributeNames ?? new List<string> {"All"}
-            };
+                IEnumerable<ReceivedMessage> messages = await _queueClient.GetNextMessagesAsync(_requestConfig);
+                foreach (var message in messages)
+                {
+                    _receivedCache.Enqueue(message);
+                }
+            }
         }
     }
 
     public class MessageReceiverConfig
     {
-        public int MaxNumberOfMessages { get; set; }
+        public int? MaxNumberOfMessages { get; set; }
         public string QueueUrl { get; set; }
-        public int VisibilityTimeout { get; set; }
-        public int WaitTimeSeconds { get; set; }
+        public int? VisibilityTimeout { get; set; }
+        public int? WaitTimeSeconds { get; set; }
         public List<string> AttributeNames { get; set; }
         public List<string> MessageAttributeNames { get; set; }
     }

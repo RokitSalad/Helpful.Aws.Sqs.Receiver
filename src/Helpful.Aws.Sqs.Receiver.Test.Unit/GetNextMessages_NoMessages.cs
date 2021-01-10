@@ -22,7 +22,10 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
             _mockAwsClient.Setup(x =>
                     x.GetNextMessagesAsync(It.IsAny<ReceiveMessageRequest>()))
                 .ReturnsAsync(new List<ReceivedMessage>());
-            _messageReceiver = new MessageReceiver(new MessageReceiverConfig(), _mockAwsClient.Object);
+            _messageReceiver = new MessageReceiver(new MessageReceiverConfig
+            {
+                QueueUrl = "some url"
+            }, _mockAwsClient.Object);
 
             try
             {
