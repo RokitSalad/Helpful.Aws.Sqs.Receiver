@@ -11,11 +11,19 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
     public class SqsQueueClient : IQueueClient
     {
         private readonly IAmazonSQS _sqsClient;
+        private readonly IReceivedMessageBuilder _receivedMessageBuilder;
         private readonly CancellationToken _cancellationToken;
 
-        public SqsQueueClient(IAmazonSQS sqsClient, CancellationToken cancellationToken)
+        public SqsQueueClient(IAmazonSQS sqsClient, CancellationToken cancellationToken) :
+            this(sqsClient, new ReceivedMessageBuilder(), cancellationToken)
+        {
+            
+        }
+
+        public SqsQueueClient(IAmazonSQS sqsClient, IReceivedMessageBuilder receivedMessageBuilder, CancellationToken cancellationToken)
         {
             _sqsClient = sqsClient;
+            _receivedMessageBuilder = receivedMessageBuilder;
             _cancellationToken = cancellationToken;
         }
 
@@ -27,21 +35,7 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
             }
 
             ReceiveMessageResponse response = await _sqsClient.ReceiveMessageAsync(request, _cancellationToken);
-            return BuildMessages(response.Messages);
-        }
-
-        private static IEnumerable<ReceivedMessage> BuildMessages(List<Message> responseMessages)
-        {
-            List<ReceivedMessage> messages = new List<ReceivedMessage>();
-            foreach (Message message in responseMessages)
-            {
-                messages.Add(new ReceivedMessage
-                {
-                    OriginalMessageBody = message.Body
-                });
-            }
-
-            return messages;
+            return _receivedMessageBuilder.BuildMessages(response.Messages);
         }
     }
 }
