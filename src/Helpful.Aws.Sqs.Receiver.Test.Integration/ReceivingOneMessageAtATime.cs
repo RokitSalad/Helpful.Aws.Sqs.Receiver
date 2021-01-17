@@ -43,7 +43,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
         [OneTimeTearDown]
         public async Task Teardown()
         {
-            //await _sqsClient.DeleteQueueAsync(_testReceiveQueueName);
+            await _sqsClient.DeleteQueueAsync(_testQueueUrl);
         }
 
         [Test]
@@ -58,6 +58,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
             {
                 ReceivedMessage message = await messageReceiver.NextMessageAsync();
                 messages.Add(message);
+                message.RemoveFromQueueAsync();
             }
 
             for (var i = 0; i < 10; i++)
