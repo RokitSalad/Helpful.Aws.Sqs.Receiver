@@ -15,6 +15,10 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
         private readonly Queue<ReceivedMessage> _receivedCache;
         private readonly ReceiveMessageRequest _requestConfig;
 
+        public int UnprocessedMessageCount => _receivedCache.Count;
+
+        public IEnumerable<ReceivedMessage> UnprocessedMessages => _receivedCache;
+
         public MessageReceiver(MessageReceiverConfig config, IQueueClient queueClient) : 
             this(config, queueClient, new ReceiveMessageRequestBuilder())
         {

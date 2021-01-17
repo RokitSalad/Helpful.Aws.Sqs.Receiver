@@ -18,6 +18,12 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         private ReceivedMessage _returnedMessage1;
         private ReceivedMessage _returnedMessage2;
         private ReceivedMessage _returnedMessage3;
+        private int _unprocessedMessageCount1;
+        private IEnumerable<ReceivedMessage> _unprocessedMessages1;
+        private int _unprocessedMessageCount2;
+        private IEnumerable<ReceivedMessage> _unprocessedMessages2;
+        private int _unprocessedMessageCount3;
+        private IEnumerable<ReceivedMessage> _unprocessedMessages3;
 
         [OneTimeSetUp]
         public async Task Setup()
@@ -39,8 +45,16 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
 
             try
             {
+                _unprocessedMessageCount1 = _messageReceiver.UnprocessedMessageCount;
+                _unprocessedMessages1 = _messageReceiver.UnprocessedMessages.ToList();
                 _returnedMessage1 = await _messageReceiver.NextMessageAsync();
+
+                _unprocessedMessageCount2 = _messageReceiver.UnprocessedMessageCount;
+                _unprocessedMessages2 = _messageReceiver.UnprocessedMessages.ToList();
                 _returnedMessage2 = await _messageReceiver.NextMessageAsync();
+
+                _unprocessedMessageCount3 = _messageReceiver.UnprocessedMessageCount;
+                _unprocessedMessages3 = _messageReceiver.UnprocessedMessages.ToList();
                 _returnedMessage3 = await _messageReceiver.NextMessageAsync();
             }
             catch (Exception e)
@@ -56,11 +70,27 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         }
 
         [Test]
-        public void TheMessagesAreReturnedInReceviedOrder()
+        public void TheMessagesAreReturnedInReceivedOrder()
         {
             Assert.AreEqual(_messages.First(), _returnedMessage1);
             Assert.AreEqual(_messages.Skip(1).First(), _returnedMessage2);
             Assert.AreEqual(_messages.Last(), _returnedMessage3);
+        }
+
+        [Test]
+        public void TheUnprocessedMessageCountGivesExpectedValues()
+        {
+            Assert.AreEqual(0, _unprocessedMessageCount1);
+            Assert.AreEqual(2, _unprocessedMessageCount2);
+            Assert.AreEqual(1, _unprocessedMessageCount3);
+        }
+
+        [Test]
+        public void TheUnprocessedMessagesAreAvailable()
+        {
+            Assert.AreEqual(0, _unprocessedMessages1.Count());
+            Assert.AreEqual(_messages.Skip(1), _unprocessedMessages2);
+            Assert.AreEqual(_messages.Skip(2), _unprocessedMessages3);
         }
     }
 }
