@@ -11,12 +11,12 @@ using NUnit.Framework;
 
 namespace Helpful.Aws.Sqs.Receiver.Test.Integration
 {
-    public class ReceivingOneMessageAtATime
+    public class ReceivingMultipleMessagesAtATime
     {
         private AmazonSQSClient _sqsClient;
         private string _testQueueUrl;
 
-        private readonly string _testReceiveQueueName = $"helpful-aws-sqs-receiver-test-{Guid.NewGuid().ToString().Substring(0,6)}";
+        private readonly string _testReceiveQueueName = $"helpful-aws-sqs-receiver-test2-{Guid.NewGuid().ToString().Substring(0,6)}";
 
 
         [OneTimeSetUp]
@@ -41,10 +41,14 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
         }
 
         [Test]
-        public async Task ReceivesMessagesOneAtATimeUsingDefaultSettings()
+        public async Task ReceivesUpToTenMessagesAtATime()
         {
             IMessageReceiver messageReceiver =
-                ReceiverFactory.GetReceiver(AwsKeys.AccessKeyId, AwsKeys.SecretKey, "ap-southeast-2", _testQueueUrl, CancellationToken.None);
+                ReceiverFactory.GetReceiver(AwsKeys.AccessKeyId, AwsKeys.SecretKey, "ap-southeast-2", new MessageReceiverConfig
+                {
+                    QueueUrl = _testQueueUrl,
+                    MaxNumberOfMessages = 10
+                }, CancellationToken.None);
 
             List<ReceivedMessage> messages = new List<ReceivedMessage>();
 
