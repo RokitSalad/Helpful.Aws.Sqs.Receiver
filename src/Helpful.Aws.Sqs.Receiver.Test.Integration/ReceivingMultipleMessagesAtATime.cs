@@ -56,7 +56,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
             {
                 ReceivedMessage message = await messageReceiver.NextMessageAsync();
                 messages.Add(message);
-                message.RemoveFromQueueAsync();
+                await message.RemoveFromQueueAsync();
             }
 
             for (var i = 0; i < 10; i++)

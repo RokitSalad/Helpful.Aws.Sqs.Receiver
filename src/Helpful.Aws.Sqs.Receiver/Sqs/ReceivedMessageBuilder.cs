@@ -18,7 +18,7 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
             return responseMessages.Select(message => new ReceivedMessage
             {
                 OriginalMessageBody = message.Body,
-                RemoveFromQueueAsync = () => sqsClient.DeleteMessageAsync(requestQueueUrl, message.ReceiptHandle).Wait()
+                RemoveFromQueueAsync = () => sqsClient.DeleteMessageAsync(requestQueueUrl, message.ReceiptHandle)
             }).ToList();
         }
     }

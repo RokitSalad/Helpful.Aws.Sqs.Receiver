@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Amazon.SQS.Model;
 
 namespace Helpful.Aws.Sqs.Receiver.Messages
 {
@@ -7,6 +8,6 @@ namespace Helpful.Aws.Sqs.Receiver.Messages
     {
         public string OriginalMessageBody { get; set; }
 
-        public Action RemoveFromQueueAsync { get; internal set; }
+        public Func<Task<DeleteMessageResponse>> RemoveFromQueueAsync { get; internal set; }
     }
 }
