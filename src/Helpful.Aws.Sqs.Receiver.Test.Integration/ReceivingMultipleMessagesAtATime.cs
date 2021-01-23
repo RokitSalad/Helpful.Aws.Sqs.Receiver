@@ -22,6 +22,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
         [OneTimeSetUp]
         public async Task Setup()
         {
+            Console.Write(Environment.GetEnvironmentVariable("test-secret"));
             _sqsClient = SqsClient.GetAmazonSqsClient();
 
             await _sqsClient.CreateQueueAsync(new CreateQueueRequest(_testReceiveQueueName));
