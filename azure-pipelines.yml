@@ -24,7 +24,7 @@ jobs:
   # Download Azure Key Vault secrets
   - task: AzureKeyVault@1
     inputs:
-      azureSubscription: 'subscription 1(8cf7d412-05d9-4057-89eb-305fa94a6623)'
+      azureSubscription: '875bb1df-b873-4bae-bfdf-b3ef5fa69917'
       keyVaultName: 'helpful-libraries-devops'
       secretsFilter: '*'
       runAsPreJob: false 
