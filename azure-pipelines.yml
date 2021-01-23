@@ -44,6 +44,16 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+
+  - task: VSTest@2
+    displayName: 'integration test'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*Test.Integration*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
       
   - task: DotNetCoreCLI@2
     displayName: 'dotnet pack'
