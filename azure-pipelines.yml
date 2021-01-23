@@ -35,12 +35,6 @@ jobs:
       configuration: $(buildConfiguration)
       projects: '**/*.csproj'
 
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        $env:PETE_AUTOMATION_AWS_SECRET_KEY="$(pete-automation-aws-secret-key)"
-
   - task: VSTest@2
     displayName: test
     inputs:
@@ -50,8 +44,6 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
-    env:
-      TEST_SECRET: '$(test-secret)'
 
   - task: VSTest@2
     displayName: 'integration test'
@@ -62,6 +54,9 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+    env:
+      PETE_AUTOMATION_AWS_ACCESS_KEY_ID: '$(pete-automation-aws-access-key-id)'
+      PETE_AUTOMATION_AWS_SECRET_KEY: '$(pete-automation-aws-secret-key)'
 
       
   - task: DotNetCoreCLI@2
