@@ -15,10 +15,6 @@ variables:
   - group: helpful-libraries-secrets
   - name: buildConfiguration
     value: 'Release'
-  - name: PETE_AUTOMATION_AWS_ACCESS_KEY_ID
-    value: $(pete-automation-aws-access-key-id)
-  - name: PETE_AUTOMATION_AWS_SECRET_KEY
-    value: $(pete-automation-aws-secret-key)
 
 jobs:
 
