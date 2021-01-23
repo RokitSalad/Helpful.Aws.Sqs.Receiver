@@ -16,9 +16,9 @@ variables:
   - name: buildConfiguration
     value: 'Release'
   - name: PETE_AUTOMATION_AWS_ACCESS_KEY_ID
-    value: '$(pete-automation-aws-access-key-id)'
+    value: '$(PETE-AUTOMATION-AWS-ACCESS-KEY-ID)'
   - name: PETE_AUTOMATION_AWS_SECRET_KEY
-    value: '$(pete-automation-aws-secret-key)'
+    value: '$(PETE-AUTOMATION-AWS-SECRET-KEY)'
 
 jobs:
 
