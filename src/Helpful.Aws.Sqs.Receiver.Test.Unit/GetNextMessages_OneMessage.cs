@@ -58,7 +58,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit
         [Test]
         public void SHOWAVALUE()
         {
-            Assert.AreEqual(1,2, Environment.GetEnvironmentVariable("TEST-SECRET"));
+            Assert.AreEqual(1,2, Environment.GetEnvironmentVariable("TEST_SECRET"));
             //Assert.AreEqual(1, 2, "test-secret");
         }
     }
