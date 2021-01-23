@@ -58,6 +58,8 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+    env:
+      TEST_SECRET: '$(test-secret)'
 
   - task: VSTest@2
     displayName: 'integration test'
@@ -68,8 +70,6 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
-    env:
-      TEST_SECRET: '$(test-secret)'
 
       
   - task: DotNetCoreCLI@2
