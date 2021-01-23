@@ -39,7 +39,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        $env:TEST-SECRET="$(test-secret)"
+        $env:TEST_SECRET="$(test-secret)"
         $env:PETE_AUTOMATION_AWS_SECRET_KEY="$(pete-automation-aws-secret-key)"
 
   - task: VSTest@2
