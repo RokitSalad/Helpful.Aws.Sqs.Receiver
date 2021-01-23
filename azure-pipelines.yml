@@ -39,7 +39,6 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        $env:TEST_SECRET="$(test-secret)"
         $env:PETE_AUTOMATION_AWS_SECRET_KEY="$(pete-automation-aws-secret-key)"
 
   - task: VSTest@2
@@ -61,6 +60,9 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+    env:
+      TEST_SECRET: $(test-secret)
+
       
   - task: DotNetCoreCLI@2
     displayName: 'dotnet pack'
