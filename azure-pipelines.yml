@@ -61,7 +61,7 @@ jobs:
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
     env:
-      TEST_SECRET: $(test-secret)
+      TEST_SECRET: '$(test-secret)'
 
       
   - task: DotNetCoreCLI@2
