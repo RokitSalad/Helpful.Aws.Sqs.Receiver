@@ -12,6 +12,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
+  - group: helpful-libraries-secrets
   - name: buildConfiguration
     value: 'Release'
 
@@ -19,15 +20,6 @@ jobs:
 
 - job: Build
   steps:
-
-  # Azure Key Vault
-  # Download Azure Key Vault secrets
-  - task: AzureKeyVault@1
-    inputs:
-      azureSubscription: 'Azure subscription 1 (8cf7d412-05d9-4057-89eb-305fa94a6623)'
-      keyVaultName: 'helpful-libraries-devops'
-      secretsFilter: '*'
-      runAsPreJob: false 
   
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
