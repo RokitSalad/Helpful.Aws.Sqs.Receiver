@@ -44,6 +44,20 @@ jobs:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+
+  - task: VSTest@2
+    displayName: 'integration test'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*Test.Integration*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+    env:
+      PETE_AUTOMATION_AWS_ACCESS_KEY_ID: '$(pete-automation-aws-access-key-id)'
+      PETE_AUTOMATION_AWS_SECRET_KEY: '$(pete-automation-aws-secret-key)'
+
       
   - task: DotNetCoreCLI@2
     displayName: 'dotnet pack'
