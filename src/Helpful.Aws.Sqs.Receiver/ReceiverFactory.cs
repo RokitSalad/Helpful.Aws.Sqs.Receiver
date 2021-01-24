@@ -21,6 +21,7 @@ namespace Helpful.Aws.Sqs.Receiver
 
             return receiver;
         }
+        
         public static IMessageReceiver GetReceiver(string awsAccessKey, string awsSecretKey, string awsRegion, MessageReceiverConfig messageReceiverConfig, CancellationToken cancellationToken)
         {
             AWSCredentials creds = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
