@@ -57,7 +57,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Integration
 
             for (var i = 0; i < 10; i++)
             {
-                Assert.That(messages.Select(m => m.OriginalMessageBody).Contains($"message body {i}"));
+                Assert.That(messages.Select(m => m.Body).Contains($"message body {i}"));
             }
 
             Assert.IsNull(await messageReceiver.NextMessageAsync());

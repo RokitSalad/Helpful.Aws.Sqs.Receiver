@@ -8,8 +8,8 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
 {
     public class ReceivedMessageBuilder : IReceivedMessageBuilder
     {
-        public IEnumerable<ReceivedMessage> BuildMessages(IAmazonSQS sqsClient, string requestQueueUrl,
-            IEnumerable<Message> responseMessages)
+        public IEnumerable<ReceivedMessage> BuildMessages(IEnumerable<Message> responseMessages, IAmazonSQS sqsClient,
+            string requestQueueUrl)
         {
             if (responseMessages == null)
             {
@@ -17,7 +17,10 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
             }
             return responseMessages.Select(message => new ReceivedMessage
             {
-                OriginalMessageBody = message.Body,
+                Body = message.Body,
+                MessageId = message.MessageId,
+                Attributes = message.Attributes,
+                MessageAttributes = message.MessageAttributes,
                 RemoveFromQueueAsync = () => sqsClient.DeleteMessageAsync(requestQueueUrl, message.ReceiptHandle)
             }).ToList();
         }

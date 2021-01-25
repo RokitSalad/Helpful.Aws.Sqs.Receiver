@@ -35,7 +35,7 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
             }
 
             ReceiveMessageResponse response = await _sqsClient.ReceiveMessageAsync(request, _cancellationToken);
-            return _receivedMessageBuilder.BuildMessages(_sqsClient, request.QueueUrl, response.Messages);
+            return _receivedMessageBuilder.BuildMessages(response.Messages, _sqsClient, request.QueueUrl);
         }
     }
 }

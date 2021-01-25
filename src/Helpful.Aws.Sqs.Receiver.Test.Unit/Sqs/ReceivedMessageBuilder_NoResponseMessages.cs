@@ -22,7 +22,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit.Sqs
 
             try
             {
-                _receivedMessages.AddRange(builder.BuildMessages(new Mock<IAmazonSQS>().Object, "request url", new List<Message>()));
+                _receivedMessages.AddRange(builder.BuildMessages(new List<Message>(), new Mock<IAmazonSQS>().Object, "request url"));
             }
             catch (Exception e)
             {

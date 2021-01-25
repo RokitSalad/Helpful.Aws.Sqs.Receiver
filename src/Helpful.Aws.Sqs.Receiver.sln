@@ -7,7 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpful.Aws.Sqs.Receiver", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpful.Aws.Sqs.Receiver.Test.Integration", "Helpful.Aws.Sqs.Receiver.Test.Integration\Helpful.Aws.Sqs.Receiver.Test.Integration.csproj", "{602F4CAD-BC9D-4CAD-85C0-94018CA97534}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpful.Aws.Sqs.Receiver.Test.Unit", "Helpful.Aws.Sqs.Receiver.Test.Unit\Helpful.Aws.Sqs.Receiver.Test.Unit.csproj", "{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpful.Aws.Sqs.Receiver.Test.Unit", "Helpful.Aws.Sqs.Receiver.Test.Unit\Helpful.Aws.Sqs.Receiver.Test.Unit.csproj", "{C821B191-E2A1-4C8C-8022-6B8B5AC80CE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8DBCD497-66C1-406F-8AF7-F559AE7CE1E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

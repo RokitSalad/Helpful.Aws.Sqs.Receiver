@@ -42,7 +42,7 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit.Sqs
 
             try
             {
-                _receivedMessages.AddRange(builder.BuildMessages(new Mock<IAmazonSQS>().Object, "request url", _messages));
+                _receivedMessages.AddRange(builder.BuildMessages(_messages, new Mock<IAmazonSQS>().Object, "request url"));
             }
             catch (Exception e)
             {
@@ -65,8 +65,8 @@ namespace Helpful.Aws.Sqs.Receiver.Test.Unit.Sqs
         [Test]
         public void TheMessagesAreBuiltCorrectly()
         {
-            Assert.AreEqual(_messages[0].Body, _receivedMessages[0].OriginalMessageBody);
-            Assert.AreEqual(_messages[1].Body, _receivedMessages[1].OriginalMessageBody);
+            Assert.AreEqual(_messages[0].Body, _receivedMessages[0].Body);
+            Assert.AreEqual(_messages[1].Body, _receivedMessages[1].Body);
         }
     }
 }

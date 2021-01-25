@@ -7,7 +7,7 @@ namespace Helpful.Aws.Sqs.Receiver.Sqs
 {
     public interface IReceivedMessageBuilder
     {
-        IEnumerable<ReceivedMessage> BuildMessages(IAmazonSQS sqsClient, string requestQueueUrl,
-            IEnumerable<Message> responseMessages);
+        IEnumerable<ReceivedMessage> BuildMessages(IEnumerable<Message> responseMessages, IAmazonSQS sqsClient,
+            string requestQueueUrl);
     }
 }
