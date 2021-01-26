@@ -106,5 +106,5 @@ jobs:
       custom: nuget
       arguments: >
         push $(Pipeline.Workspace)/**/*.nupkg
-        -s $(publid-nuget-org-server-url)
+        -s $(public-nuget-org-server-url)
         -k $(helpful-push)
