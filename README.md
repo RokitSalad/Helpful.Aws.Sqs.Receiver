@@ -23,7 +23,15 @@ ReceivedMessage message = await messageReceiver.NextMessageAsync();
 
 The body of the original SQS message is returned in the [ReceivedMessage](/src/Helpful.Aws.Sqs.Receiver/Messages/ReceivedMessage.cs) as a string. There is also an async method available on the message for you to use to delete the originating SQS message upon successful processing.
 
-Based on the configuration of the message receiver, the message will either come directly from SQS or from the local cache (when receiving multiple messages at once).
+```csharp
+ReceivedMessage message = await messageReceiver.NextMessageAsync();
+// do some processing
+await message.RemoveFromQueueAsync();
+```
+
+If something goes wrong during message processing, and you with to try the message again, simply avoid removing the message from the queue. The message will be retried again after the VisibilityTimeout has elapsed.
+
+Based on the configuration of the message receiver, the message will either come directly from SQS or from the local cache (when receiving multiple messages at once). See below for more details.
 
 ## Configuarion and Defaults
 
@@ -52,3 +60,5 @@ If you elect to receive more than one message at a time, the message receiver wi
 **WaitTimeSeconds** - setting WaitTimeSeconds to any value other than zero will enable long polling, which is generally a much faster option for receiving messages than the alternative. Leaving this value blank will enable the default of 30 seconds, which is the longest watit time possible.
 
 **AttributeNames** / **MessageAttributeNames** - the default for these collections is to return all attributes and message attributes. If you want to configure specific attributes to be returned and exclude others, that can be set here.
+
+[![Build Status](https://dev.azure.com/pete0159/Helpful.Libraries/_apis/build/status/RokitSalad.Helpful.Aws.Sqs.Receiver?branchName=main)](https://dev.azure.com/pete0159/Helpful.Libraries/_build/latest?definitionId=12&branchName=main)
