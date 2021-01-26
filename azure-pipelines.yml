@@ -107,4 +107,4 @@ jobs:
       arguments: >
         push $(Pipeline.Workspace)/**/*.nupkg
         -s $(public-nuget-org-server-url)
-        -k $(helpful-push)
+        -k $(helpful-public-nuget-push)
