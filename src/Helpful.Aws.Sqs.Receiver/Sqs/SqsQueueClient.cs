@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using Helpful.Aws.Sqs.Receiver.Messages;
 
 namespace Helpful.Aws.Sqs.Receiver.Sqs
 {

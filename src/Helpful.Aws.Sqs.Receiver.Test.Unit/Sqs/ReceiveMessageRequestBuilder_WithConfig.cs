@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Amazon.SQS.Model;
 using Helpful.Aws.Sqs.Receiver.Exceptions;
-using Helpful.Aws.Sqs.Receiver.Messages;
 using Helpful.Aws.Sqs.Receiver.Sqs;
 using NUnit.Framework;
 

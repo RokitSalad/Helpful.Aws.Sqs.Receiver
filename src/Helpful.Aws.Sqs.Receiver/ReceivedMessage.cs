@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amazon.SQS.Model;
 
-namespace Helpful.Aws.Sqs.Receiver.Messages
+namespace Helpful.Aws.Sqs.Receiver
 {
     public class ReceivedMessage
     {

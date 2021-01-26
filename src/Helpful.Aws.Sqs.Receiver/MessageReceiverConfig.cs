@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Helpful.Aws.Sqs.Receiver.Messages
+namespace Helpful.Aws.Sqs.Receiver
 {
     public class MessageReceiverConfig
     {

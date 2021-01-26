@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using Helpful.Aws.Sqs.Receiver.Messages;
 using Helpful.Aws.Sqs.Receiver.Sqs;
 using Moq;
 using NUnit.Framework;

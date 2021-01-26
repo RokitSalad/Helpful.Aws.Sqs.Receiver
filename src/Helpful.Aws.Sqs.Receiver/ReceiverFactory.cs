@@ -2,7 +2,6 @@ using System.Threading;
 using Amazon;
 using Amazon.Runtime;
 using Amazon.SQS;
-using Helpful.Aws.Sqs.Receiver.Messages;
 using Helpful.Aws.Sqs.Receiver.Sqs;
 
 namespace Helpful.Aws.Sqs.Receiver

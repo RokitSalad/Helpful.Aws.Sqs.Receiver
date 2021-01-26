@@ -2,7 +2,6 @@
 using System.Linq;
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using Helpful.Aws.Sqs.Receiver.Messages;
 
 namespace Helpful.Aws.Sqs.Receiver.Sqs
 {

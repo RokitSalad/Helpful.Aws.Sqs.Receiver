@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Amazon.SQS.Model;
 using Helpful.Aws.Sqs.Receiver.Exceptions;
-using Helpful.Aws.Sqs.Receiver.Messages;
 using Moq;
 using NUnit.Framework;
 
